@@ -111,6 +111,6 @@ section {
         display: none;
     }
     .mobile-title, .mobile-header {
-        display: block;
+        display: inline;
     }
 }
