@@ -34,32 +34,75 @@ WARNING!!! WARNING!!!
 // See Lecture 52, part 2
 // (Note, Step 2 will be done in the SpeakHello.js file.)
 
-var names = ["Yaakov", "John", "Jen", "Jason", "Paul", "Frank", "Larry", "Paula", "Laura", "Jim"];
+(function () {
+  var names = ["Yaakov", "John", "Jen", "Jason", "Paul", "Frank", "Larry", "Paula", "Laura", "Jim"];
 
-// STEP 10:
-// Loop over the names array and say either 'Hello' or "Good Bye"
-// using the 'speak' method or either helloSpeaker's or byeSpeaker's
-// 'speak' method.
-// See Lecture 50, part 1
-for (/* fill in parts of the 'for' loop to loop over names array */) {
+  // STEP 10:
+  // Loop over the names array and say either 'Hello' or "Good Bye"
+  // using the 'speak' method or either helloSpeaker's or byeSpeaker's
+  // 'speak' method.
+  // See Lecture 50, part 1
+  for (var i = 0; i < names.length; i++) {
+    // STEP 11:
+    // Retrieve the first letter of the current name in the loop.
+    // Use the string object's 'charAt' function. Since we are looking for
+    // names that start with either upper case or lower case 'J'/'j', call
+    // string object's 'toLowerCase' method on the result so we can compare
+    // to lower case character 'j' afterwards.
+    // Look up these methods on Mozilla Developer Network web site if needed.
+    var firstLetter = names[i].charAt(0).toLowerCase();
 
-  // STEP 11:
-  // Retrieve the first letter of the current name in the loop.
-  // Use the string object's 'charAt' function. Since we are looking for
-  // names that start with either upper case or lower case 'J'/'j', call
-  // string object's 'toLowerCase' method on the result so we can compare
-  // to lower case character 'j' afterwards.
-  // Look up these methods on Mozilla Developer Network web site if needed.
-  // var firstLetter =
-
-  // STEP 12:
-  // Compare the 'firstLetter' retrieved in STEP 11 to lower case
-  // 'j'. If the same, call byeSpeaker's 'speak' method with the current name
-  // in the loop. Otherwise, call helloSpeaker's 'speak' method with the current
-  // name in the loop.
-  if (/* fill in condition here */) {
-    // byeSpeaker.xxxx
-  } else {
-    // helloSpeaker.xxxx
+    // STEP 12:
+    // Compare the 'firstLetter' retrieved in STEP 11 to lower case
+    // 'j'. If the same, call byeSpeaker's 'speak' method with the current name
+    // in the loop. Otherwise, call helloSpeaker's 'speak' method with the current
+    // name in the loop.
+    if (firstLetter === 'j') {
+      byeSpeaker.speak(names[i]);
+    } else {
+      helloSpeaker.speak(names[i]);
+    }
   }
-}
+
+  function namesMapper(name){
+    if (name.charAt(0).toLowerCase() === 'j') {
+      return byeSpeaker.speakSimple(name);
+    } else {
+      return helloSpeaker.speakSimple(name);
+    }
+  }
+
+  function namesReducer (accumulator, name) {
+    if (name.charAt(0).toLowerCase() === 'j') {
+      accumulator.bye.push(byeSpeaker.speakSimple(name));
+    } else {
+      accumulator.hello.push(helloSpeaker.speakSimple(name));
+    }
+    return accumulator;
+  }
+
+  // In the main script.js, use the map function to create an array based on the 
+  // names array. This array will contain the greetings based on the names with the 
+  // same rules as implemented previously. The function passed into the map function 
+  // should not be an inline function, i.e., separate it into its own named function 
+  // and pass it into the map function as a value.
+  var mappedNames = names.map(namesMapper);
+  
+  for(var j = 0; j < mappedNames.length; j++){
+    console.log(mappedNames[j]);
+  }
+
+  // In the main script.js, use the reduce function to create 2 separate arrays: 
+  // one with all the ‘hello’ greetings and another with all the good bye greetings. 
+  // Then, loop over each array (obviously separately) and print out the greetings to 
+  // the console with console.log. 
+  // You are required to use {hello: [], bye: []} as your initialValue. 
+  var reducedNames = names.reduce(namesReducer, {hello: [], bye: []});
+  
+  for(var k = 0; k < reducedNames.hello.length; k++){
+    console.log(reducedNames.hello[k]);
+  }
+  for(var l = 0; l < reducedNames.bye.length; l++){
+    console.log(reducedNames.bye[l]);
+  }
+})();
