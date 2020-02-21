@@ -4,7 +4,8 @@
   angular.module('ShoppingListCheckOff', [])
     .controller('ToBuyController', ToBuyController)
     .controller('AlreadyBoughtController', AlreadyBoughtController)
-    .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+    .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+    .filter('angularDollars', AngularDollarsFilter);
 
   ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService) {
@@ -68,6 +69,20 @@
 
     service.getItemsAlreadyBought = function () {
       return boughtItems;
+    };
+  }
+
+  function AngularDollarsFilter() {
+    return function (input) {
+
+      // We want to make sure the input value is numeric, otherwise we want to set it to 0
+      if (!isNumeric(input)) {
+        input = 0;
+      }
+
+      // code to properly round to 2 decimal places 
+      // modified from https://stackoverflow.com/questions/6134039/format-number-to-always-show-2-decimal-places
+      return '$$$' + (Math.round(input * 100) / 100).toFixed(2);
     };
   }
 
