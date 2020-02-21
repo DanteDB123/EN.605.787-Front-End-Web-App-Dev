@@ -4,8 +4,7 @@
   angular.module('ShoppingListCheckOff', [])
     .controller('ToBuyController', ToBuyController)
     .controller('AlreadyBoughtController', AlreadyBoughtController)
-    .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
-    .filter('angularDollars', AngularDollarsFilter);
+    .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
   ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService) {
@@ -19,13 +18,18 @@
   }
 
 
-  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService', 'angularDollarsFilter'];
-  function AlreadyBoughtController(ShoppingListCheckOffService, angularDollarsFilter) {
+  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+  function AlreadyBoughtController(ShoppingListCheckOffService) {
     var alreadyBought = this;
 
     alreadyBought.items = ShoppingListCheckOffService.getItemsAlreadyBought();
     alreadyBought.getTotalPrice = function (item) {
-      return angularDollarsFilter(item.quantity * item.pricePerItem);
+      // We want to make sure the input value is numeric, otherwise we want to set it to 0
+      if (!isNumeric(item.quantity) || !isNumeric(item.pricePerItem)) {
+        return 0;
+      } else {
+        return item.quantity * item.pricePerItem;
+      }
     };
   }
 
@@ -64,19 +68,6 @@
 
     service.getItemsAlreadyBought = function () {
       return boughtItems;
-    };
-  }
-
-  function AngularDollarsFilter() {
-    return function (input) {
-
-      // We want to make sure the input value is numeric, otherwise we want to set it to 0
-      if (!isNumeric(input)) {
-        input = 0;
-      }
-      // code to properly round to 2 decimal places 
-      // modified from https://stackoverflow.com/questions/6134039/format-number-to-always-show-2-decimal-places
-      return '$$$' + (Math.round(input * 100) / 100).toFixed(2);
     };
   }
 
