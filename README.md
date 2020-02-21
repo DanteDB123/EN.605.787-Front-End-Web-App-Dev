@@ -11,3 +11,4 @@
 ## [Single Page Web Applications with AngularJS](https://github.com/jhu-ep-coursera/fullstack-course5/)
 
 [Assignment 7](./module7-solution/index.html) <br>
+[Assignment 8](./module8-solution/index.html) <br>
