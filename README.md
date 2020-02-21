@@ -2,13 +2,38 @@
 
 ## [HTML, CSS and Javascript for Web Developers](https://github.com/jhu-ep-coursera/fullstack-course4/)
 
-[Assignment 2](./module2-solution/index.html) <br>
-[Assignment 3](./module3-solution/index.html) <br>
-[Assignment 4](./module4-solution/index.html) <br>
-[Assignment 5](./module5-solution/index.html) <br>
-[Assignment 6](./module6-solution/index.html) <br>
+### Assignment 2
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module2)
+* [Implementation](./module2-solution/index.html)
+
+### Assignment 3
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module3)
+* [Implementation](./module3-solution/index.html)
+
+### Assignment 4
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module4)
+* [Implementation](./module4-solution/index.html)
+
+### Assignment 5
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module5)
+* [Implementation](./module5-solution/index.html)
+
+### Assignment 6
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module6)
+* [Implementation](./module6-solution/index.html)
 
 ## [Single Page Web Applications with AngularJS](https://github.com/jhu-ep-coursera/fullstack-course5/)
 
-[Assignment 7](./module7-solution/index.html) <br>
-[Assignment 8](./module8-solution/index.html) <br>
+### Assignment 7
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module7)
+* [Implementation](./module7-solution/index.html)
+
+### Assignment 8
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module8)
+* [Implementation](./module8-solution/index.html)
+
+### Assignment 9
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module9)
+
+### Assignment 10
+* [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module10)
