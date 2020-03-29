@@ -34,6 +34,7 @@
 
 ### Assignment 9
 * [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module9)
+* [Implementation](./module9-solution/index.html)
 
 ### Assignment 10
 * [Instructions](https://ychaikin.github.io/jhu-ajax-course/Module10)
