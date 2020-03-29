@@ -12,12 +12,17 @@
     var narrowItDown = this;
 
     narrowItDown.getMatchedMenuItems = function (searchValue) {
-      MenuSearchService.getMatchedMenuItems(searchValue).then(function (result) {
-        narrowItDown.found = result;
-      })
-        .catch(function (error) {
-          console.log("Something went wrong getting matched menu items");
-        });
+      // if there is no search term then return an empty array
+      if (!searchValue || searchValue === '') {
+        narrowItDown.found = [];
+      } else {
+        MenuSearchService.getMatchedMenuItems(searchValue)
+          .then(function (result) {
+            narrowItDown.found = result;
+          }).catch(function (error) {
+            console.log("Something went wrong getting matched menu items");
+          });
+      }
     };
 
     narrowItDown.removeItemAtIndex = function (index) {
@@ -34,20 +39,14 @@
     // through them to pick out the ones whose description matches the searchTerm. Once a 
     // list of found items is compiled, it should return that list (wrapped in a promise).
     service.getMatchedMenuItems = function (searchTerm) {
-
       var config = {
         method: "GET",
         url: (ApiBasePath + "/menu_items.json")
       };
 
       return $http(config).then(function (result) {
-        if (searchTerm) {
-          // process result and only keep items that match
-          return result.data.menu_items.filter(item => item.description.indexOf(searchTerm) !== -1);
-        } else {
-          // if there is no search term then return an empty array
-          return [];
-        }
+        // process result and only keep items that match
+        return result.data.menu_items.filter(item => item.description.indexOf(searchTerm) !== -1);
       });
     };
   }
