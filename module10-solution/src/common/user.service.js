@@ -11,7 +11,6 @@ function UserService() {
     return service.user;
   };
 
-
   service.setUserDetails = function (user) {
     service.user = user;
   };
