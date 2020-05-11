@@ -5,8 +5,8 @@ angular.module('common')
 .service('MenuService', MenuService);
 
 
-MenuService.$inject = ['$http', 'ApiPath'];
-function MenuService($http, ApiPath) {
+MenuService.$inject = ['$http', '$q', 'ApiPath'];
+function MenuService($http, $q, ApiPath) {
   var service = this;
 
   service.getCategories = function () {
@@ -34,10 +34,15 @@ function MenuService($http, ApiPath) {
     };
 
     return $http(config);
-  }
+  };
 
+  service.doesMenuItemExist = function (shortname) {
+    return service.getMenuItemPromise(shortname).then(function(response) {
+      return $q.resolve(true);
+    }).catch(function(error){
+      return $q.resolve(false);
+    });
+  };
 }
-
-
 
 })();

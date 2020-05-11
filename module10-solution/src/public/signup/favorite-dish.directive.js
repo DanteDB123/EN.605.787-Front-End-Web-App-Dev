@@ -12,23 +12,22 @@
       require: 'ngModel',
       link: function (scope, elm, attrs, ctrl) {
 
-        ctrl.$asyncValidators.favoriteDish = function (shortname) {
-
-          if (ctrl.$isEmpty(shortname)) {
-            // consider empty model valid
+        ctrl.$asyncValidators.favoriteDish = function (shortName) {
+          // consider empty model valid
+          if (ctrl.$isEmpty(shortName)) {
             return $q.when();
+          } else {
+            return MenuService.doesMenuItemExist(shortName).then(function (response) {
+              if(response === true){
+                return $q.resolve();
+              } else {
+                return $q.reject();
+              }
+            }).catch(function (error) {
+              return $q.reject();
+            });
           }
-
-          var def = $q.defer();
-
-          MenuService.getMenuItemPromise(shortname).then(function () {
-            def.resolve();
-          }).catch(function () {
-            def.reject();
-          });
-
-          return def.promise;
-        };
+        }
       }
     };
 
